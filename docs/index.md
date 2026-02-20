@@ -1,5 +1,126 @@
+## 2.1 电磁场与阿哈罗诺夫-玻姆相位
 
-## 3. 直角坐标系下的理论模型 (Theoretical Model in Cartesian Coordinates)
+本节旨在系统性地建立阿哈罗诺夫-玻姆（Aharonov-Bohm, AB）效应的理论基础。我们将首先从不受外力作用的自由粒子动力学出发，确立基本的量子演化框架；随后，借助最小耦合原理将电磁相互作用自然地纳入该体系；最终，严格推导出在双缝干涉实验构型下，由磁矢量势引起的量子拓扑相移。
+
+### 2.1.1 量子系统的演化方程
+
+对于质量为 $m$ 的非相对论量子粒子，其微观动力学行为由含时薛定谔方程（TDSE）规定。系统的总能量算符 $\hat{E}$ 和动量算符 $\hat{\mathbf{p}}$ 分别由时间和空间的偏导数定义：
+
+$$    \hat{E} = i\hbar \frac{\partial}{\partial t}, \quad \hat{\mathbf{p}} = -i\hbar \nabla$$
+
+在粒子运动速度远小于光速（$v \ll c$）的非相对论极限下，自由粒子的经典能量-动量关系 $E = \frac{p^2}{2m}$ 能够通过上述算符的替换直接映射为自由粒子薛定谔方程：
+
+$$    i\hbar \frac{\partial \psi(\mathbf{r}, t)}{\partial t} = -\frac{\hbar^2}{2m} \nabla^2 \psi(\mathbf{r}, t)$$
+
+其中，$\psi(\mathbf{r}, t)$ 是表征粒子概率幅的复空间波函数。该偏微分方程清晰地描述了在不受任何外部势场相互作用的理想真空环境中，粒子的概率密度 $|\psi|^2$ 随时间自然演化与扩散的纯动力学过程。这一模型构成了本研究的基石，为后续引入电磁势带来的相位修正提供了基准参考。
+
+### 2.1.2 最小耦合机制与含时薛定谔方程
+
+为了探究 AB 效应，需要引入外部电磁场对量子系统的实质性影响。考虑到带电粒子与电磁势之间存在的非局域相互作用，从经典的拉格朗日力学出发，对于质量为 $m$、带有电荷 $q$ 且在给定的宏观电磁势 $(\mathbf{A}, \phi)$ 中运动的粒子，其拉格朗日量为：
+
+$$L = \frac{1}{2} m v^2 + q\, \mathbf{A} \cdot \mathbf{v} - q\phi.$$
+
+通过对速度项求偏导，由该拉格朗日量导出的正则动量为：
+
+$$\mathbf{p}_{\text{canonical}}  = \frac{\partial L}{\partial \mathbf{v}} = m\mathbf{v} + q\mathbf{A}.$$
+
+这一重要结果表明，在电磁场中，决定系统动力学演化的正则动量 $\mathbf{p}_{\text{canonical}}$ 不再等于纯粹的机械动量 $m\mathbf{v}$，而是多出了一项与矢量势成正比的场动量 $q\mathbf{A}$。在正则量子化过程中，被提升为微分算符的是正则动量，即 $\hat{\mathbf{p}} = -i\hbar \nabla$。为了在薛定谔方程中正确表达粒子的实际动能（依赖于机械动量 $m\mathbf{v}$），必须进行逆向代换 $m\mathbf{v} = \hat{\mathbf{p}} - q\mathbf{A}$。这直接导出了量子力学中引入电磁场的标准代换规则：
+
+$$  \hat{\mathbf{p}} \to \hat{\mathbf{p}} - q\mathbf{A}(\mathbf{r}, t).$$
+
+在应用此动量代换的同时，还必须将标量势能项 $q\phi(\mathbf{r}, t)$ 加入系统的总能量中。由此，体系的哈密顿量便从原本的自由粒子形式 $\hat{H}_0 = \frac{\hat{\mathbf{p}}^2}{2m}$ 演化为包含完整耦合的算符：
+
+$$    \hat{H} = \frac{1}{2m} \left( \hat{\mathbf{p}} - q\mathbf{A} \right)^2 + q\phi + V_{conf}.$$
+
+在此表达式中，$\mathbf{A}$ 是通过旋度关系 $\mathbf{B} = \nabla \times \mathbf{A}$ 与实际磁场相联系的矢量势，而 $V_{conf}$ 则代表了系统中为了特定实验目的而设置的任何空间限制势，例如双缝实验中的刚性挡板势垒。需要特别注意的是，由于动量算符 $\hat{\mathbf{p}}$ 本质上是一个空间梯度算符，它通常不与空间分布的矢量势 $\mathbf{A}$ 对易。因此，在展开哈密顿量中的平方算符时必须保持高度严谨。将其作用于任意波函数 $\psi$ 上，展开过程如下：
+
+$$\begin{aligned}
+\left( \hat{\mathbf{p}} - q\mathbf{A} \right)^2 \psi 
+&= (-i\hbar \nabla - q\mathbf{A}) \cdot (-i\hbar \nabla - q\mathbf{A}) \psi \\
+&= -\hbar^2 \nabla^2 \psi + i\hbar q \left( \nabla \cdot (\mathbf{A}\psi) + \mathbf{A} \cdot \nabla \psi \right) + q^2 A^2 \psi \\
+&= -\hbar^2 \nabla^2 \psi + 2i\hbar q (\mathbf{A} \cdot \nabla \psi) + i\hbar q (\nabla \cdot \mathbf{A})\psi + q^2 A^2 \psi.
+\end{aligned}$$
+
+进一步利用矢量微积分中的乘积法则 $\nabla \cdot (\mathbf{A}\psi) = (\nabla \cdot \mathbf{A})\psi + \mathbf{A} \cdot \nabla \psi$，并在不预先施加任何特定规范，如库仑规范，以保持理论最大普遍性的前提下，完整的哈密顿算符最终定型为：
+
+$$  \hat{H} = -\frac{\hbar^2}{2m}\nabla^2   + \frac{i\hbar q}{m} \mathbf{A} \cdot \nabla   + \frac{i\hbar q}{2m} (\nabla \cdot \mathbf{A})   + \frac{q^2}{2m} A^2   + V_{total}.$$
+
+结合上述算符推导，带有完整电磁耦合项的含时薛定谔方程即可最终表示为：
+
+$$i\hbar \frac{\partial \psi}{\partial t} = \left[ -\frac{\hbar^2}{2m}\nabla^2 + \frac{i\hbar q}{m} \mathbf{A} \cdot \nabla + \frac{i\hbar q}{2m} (\nabla \cdot \mathbf{A}) + \frac{q^2}{2m} A^2 + V_{total} \right] \psi.$$
+
+### 2.1.3 阿哈罗诺夫-玻姆相位的推导
+
+前节构建的含时薛定谔方程描述了系统在电磁场中的局域动力学演化。为进一步量化矢量势 $\mathbf{A}$ 对宏观干涉图样的影响，需对无磁场区域（$\mathbf{B} = 0$）内的波函数相位进行解析推导。在经典力学中，粒子在 $\mathbf{B} = 0$ 的区域内不受洛伦兹力作用。而在量子力学中，若该区域内矢量势 $\mathbf{A} \neq 0$，波函数便会在无场自由粒子解 $\psi_0(\mathbf{r})$ 的基础上，累积一个依赖于路径的狄拉克相位因子：
+
+$$\psi(\mathbf{r}) = \psi_0(\mathbf{r}) \exp\left( \frac{iq}{\hbar} \int_{\mathbf{r}_0}^{\mathbf{r}} \mathbf{A}(\mathbf{r}') \cdot d\mathbf{l}' \right)$$
+
+将此相位演化规律应用于双缝干涉模型。假设电子从同一波源出发，经由两条包围磁通量中心的不同路径（路径 1 和路径 2）抵达探测屏同一点。沿这两条路径累积的总相位可分别表示为：
+
+$$\varphi_1 = \varphi_1^{(0)} + \frac{q}{\hbar} \int_{\text{Path } 1} \mathbf{A} \cdot d\mathbf{l}$$
+
+$$\varphi_2 = \varphi_2^{(0)} + \frac{q}{\hbar} \int_{\text{Path } 2} \mathbf{A} \cdot d\mathbf{l}$$
+
+其中，$\varphi^{(0)}$ 为无电磁势时的自由空间几何相位。两条路径在探测屏上产生的总相位差 $\Delta \varphi = \varphi_1 - \varphi_2$ 为：
+
+$$\Delta \varphi = \left( \varphi_1^{(0)} - \varphi_2^{(0)} \right) + \frac{q}{\hbar} \left( \int_{\text{Path } 1} \mathbf{A} \cdot d\mathbf{l} - \int_{\text{Path } 2} \mathbf{A} \cdot d\mathbf{l} \right)$$
+
+由于两条路径的起点与终点相同，路径 1 的正向积分与路径 2 的反向积分构成了一个包围中心磁芯的闭合回路。根据斯托克斯定理，该闭合路径的线积分等于穿过其包围曲面的总磁通量 $\Phi_B$：
+
+$$\oint \mathbf{A} \cdot d\mathbf{l} = \iint (\nabla \times \mathbf{A}) \cdot d\mathbf{S} = \Phi_B$$
+
+代入上式，系统总的相位差可化简为：
+
+$$\Delta \varphi_{\text{total}} = \Delta \varphi_{\text{geo}} + \frac{q}{\hbar} \Phi_B$$
+
+式中第一项 $\Delta \varphi_{\text{geo}}$ 为几何光程差引起的相位差；第二项即为阿哈罗诺夫-玻姆（AB）相移。该结果表明，处于 $\mathbf{B} = 0$ 区域的粒子，其干涉图样受闭合回路内总磁通量 $\Phi_B$ 的严格调制。
+
+为进一步量化该效应，引入磁通量量子常数 $\Phi_0 = h/|q|$，AB 相移可表示为无量纲形式：
+
+$$\Delta \varphi_{AB} = 2\pi \frac{\Phi_B}{\Phi_0}$$
+
+该公式确立了磁场通量与量子相移之间的线性关系，为后续数值模拟中干涉条纹平移量的理论验证提供了量化依据。
+## 2.2 双缝干涉的解析物理模型
+
+### 2.2.1 有限缝宽下的总波函数与衍射包络
+
+在理想的双缝干涉模型中，狭缝通常被视为点源。但在真实的物理实验中，波幅并非空间常数，而是受到单缝衍射的调制，从而引入了强烈的角向依赖性。考虑宽度为 $a$、中心间距为 $d$ 的双缝，电子波穿过狭缝后向远处的探测屏传播。在夫琅禾费近似（远场条件）下，单缝衍射的远场波幅分布为：
+
+$$T(\theta) = a \, \mathrm{sinc}\!\left(\frac{\pi a \sin\theta}{\lambda}\right)$$
+
+其中 $\mathrm{sinc}(x) = \sin(x) / x$。该函数 $T(\theta)$ 描述了单缝衍射的波幅随衍射角 $\theta$ 的变化规律，它将作为整个双缝干涉图样的整体包络线。双缝中的每一条狭缝都会贡献一个子波，该子波不仅包含由空间光程差引起的几何相位，还包含由磁通量引入的阿哈罗诺夫-玻姆（AB）相位。两束子波在角坐标 $\theta$ 处的波函数可分别表示为：
+
+$$\psi_1(\theta) = T(\theta) \, e^{i\Phi_1} \, e^{-i k d \sin\theta / 2}$$
+
+$$\psi_2(\theta) = T(\theta) \, e^{i\Phi_2} \, e^{+i k d \sin\theta / 2}$$
+
+式中，指数项 $e^{\pm i k d \sin\theta /2}$ 源于两缝到达屏幕观测点之间的几何光程差在 $\theta$ 方向上的投影；而 $\Phi_1$ 与 $\Phi_2$ 则是由于空间矢量势 $\mathbf{A}$ 累积的 AB 相位。根据前文推导，两者之差即为总 AB 相移：$\delta_{\text{AB}} = \Phi_1 - \Phi_2 = q\Phi_B/\hbar$。根据态叠加原理，屏幕上的总波函数为两束子波之和：
+
+$$\psi_{\text{total}}(\theta) = \psi_1(\theta) + \psi_2(\theta) = T(\theta) \left( e^{i\Phi_1} e^{-i k d \sin\theta / 2} + e^{i\Phi_2} e^{+i k d \sin\theta / 2} \right)$$
+
+为简化表达式，定义平均 AB 相位 $\bar{\Phi} = (\Phi_1 + \Phi_2)/2$，以及包含几何与拓扑效应的总相位差 $\delta_{\text{total}} = \delta_{\text{geo}} - \delta_{\text{AB}}$，其中几何相位差为 $\delta_{\text{geo}} = k d \sin\theta$。利用欧拉公式提取公因子后，总波函数可被重写为：
+
+$$\psi_{\text{total}}(\theta) = 2 T(\theta) \, e^{i \bar{\Phi}} \cos\!\left(\frac{\delta_{\text{total}}(\theta)}{2}\right)$$
+
+### 2.2.2 强度分布、周期性与对称性破缺
+
+干涉图样的空间周期性与宏观可观测特性直接源于量子力学的测量公理。根据玻恩法则（Born's rule），探测屏上的概率密度（即观测强度 $I$）正比于总波函数的模方：
+
+$$I(\theta) \propto |\psi_{\text{total}}(\theta)|^2$$
+
+将 2.2.1 节所得的总波函数代入，并利用半角公式 $\cos^2(x) = (1+\cos 2x)/2$，可得最终的强度分布解析表达式：
+
+$$I(\theta) \propto 4 \left[ T(\theta) \right]^2 \cos^2\!\left( \frac{\delta_{\text{total}}}{2} \right) = 2 \left[ T(\theta) \right]^2 \left[ 1 + \cos(\delta_{\text{total}}) \right]$$
+
+展开 $T(\theta)$ 与 $\delta_{\text{total}}$ 后，获得了完整的干涉强度分布公式：
+
+$$I(\theta) \propto \underbrace{\mathrm{sinc}^2\!\left(\frac{\pi a \sin\theta}{\lambda}\right)}_{\text{衍射包络}} \cdot \underbrace{\cos^2\!\left(\frac{\pi d \sin\theta}{\lambda} + \frac{\pi \Phi_B}{\Phi_0}\right)}_{\text{干涉条纹}}$$
+
+该解析表达式揭示了 AB 效应的核心物理特征。在宏观强度调制方面，系统的最终干涉图样由一个宽广的单缝衍射包络（sinc 函数）和一个高频的双缝干涉项（cos 函数）相乘共同决定。该图样展现出严格的 $\Phi_0$ 周期性。由于余弦函数具有天然的 $2\pi$ 周期，每当磁通量 $\Phi_B$ 改变一个完整的磁通量量子 $\Phi_0 = h/|q|$ 时，相移量恰好为 $2\pi$（对应实际干涉相差 $2\pi \Phi_B / \Phi_0$）。此时干涉图样将完全恢复至初始状态，这种精确的周期性平移正是 AB 效应的标志性特征。
+
+这一公式揭示了实验中观察到不对称现象的内在机制，即空间对称性破缺。衍射包络的中心严格固定于 $\theta = 0$（几何中心）处，仅取决于狭缝宽度 $a$，不随磁场改变；然而，内部的干涉条纹却会随着磁通量 $\Phi_B$ 的施加发生横向平移。当 $\Phi_B \neq 0$ 时，余弦干涉项的极大值不再与 sinc 包络的中心对齐。这种相对位移打破了图样的空间对称性，导致观测到的“最亮主干涉条纹”偏离中心，呈现出显著的不对称亮度分布。
+
+# 3. 直角坐标系下的理论模型 (Theoretical Model in Cartesian Coordinates)
 
 **3.1 直角坐标系下的哈密顿量与空间离散化**
 
@@ -31,7 +152,13 @@ $$\psi^{(n+1)} = \left( \mathbf{I} + i\frac{\Delta t}{2\hbar} \mathbf{H} \right)
 
 在每一个时间步的推进中，上述方程转化为求解形式为 $\mathbf{M}_{LHS} \psi^{(n+1)} = \mathbf{M}_{RHS} \psi^{(n)}$ 的线性代数方程组。考虑到 $\mathbf{M}_{LHS}$ 是一个由拉普拉斯算符、一阶微分算符与对角势能矩阵叠加而成的大型极稀疏矩阵，代码调用了基于 LU 分解的直接求解器。这不仅规避了求解矩阵逆的高昂计算成本，还确保了波函数在受复变矢势干扰和双缝高势垒散射的复杂演化过程中，始终保持严密的幺正性。
 
-## 柱坐标系下的理论模型 (Theoretical Model in Cylindrical Coordinates)
+## 3.1 仿真设置
+
+需要指出的是，真实的 AB 效应电子干涉实验（如 Tonomura 等人的工作）通常在较高的加速电压（如 150 kV）下进行。然而，在基于含时薛定谔方程（TDSE）的直接数值求解中，高能电子对应极短的德布罗意波长，这要求极端的空间网格解析度，从而带来不可接受的计算开销。鉴于 AB 效应的量子拓扑相移 $\Delta \varphi_{AB}$ 仅依赖于闭合环路包围的磁通量，而与电子的动能无关，本研究采用按比例缩放的低能唯象模型（初始动能约 100 eV）进行仿真。该参数设定不仅将计算资源控制在合理范围内，确保了有限差分网格能够清晰解析波函数的空间演化，同时严格且完整地保留了系统核心的物理规律与拓扑不变性。
+
+在本数值仿真研究中，模型设定电子的初始动能约为 100 eV（对应初始波矢 $k_x \approx 2.76 \text{ a.u.}$）。在此低能区间内，电子的经典运动速度仅为光速的约 2% ($v \approx 0.02c$)，由此引入的相对论洛伦兹质量修正因子 $\gamma \approx 1.0002$。由于相对论效应（约万分之二的修正）带来的物理偏差甚至小于网格离散化产生的数值误差，系统完全处于非相对论极限下。因此，本研究采用非相对论形式的含时薛定谔方程（TDSE）作为理论推导与数值仿真的基础，这既确保了物理演化过程的精确性，又避免了引入相对论波动方程所带来的非必要计算复杂度。
+
+# 4. 柱坐标系下的理论模型 (Theoretical Model in Cylindrical Coordinates)
 
 **2.1 柱坐标系下的哈密顿量与空间离散化**
 
@@ -70,7 +197,7 @@ $$\left( \mathbf{I} + i\frac{\Delta t}{2\hbar} \mathbf{H}_A \right) \psi^{(n+1)}
 其中 $\mathbf{I}$ 为单位矩阵，$\Delta t$ 为时间步长，$\psi^{(n)}$ 为第 $n$ 个时间步的波函数列向量。
 
 在每个时间步的迭代中，由于演化矩阵 $\mathbf{H}_A$ 是随时间无关的（Time-independent），上述方程转化为求解一个大型稀疏线性代数方程组 $\mathbf{M}_{LHS} \psi^{(n+1)} = \mathbf{M}_{RHS} \psi^{(n)}$。得益于有限差分法生成的矩阵具有极高的稀疏度，利用高斯消元法（在数值软件中通常优化为基于矩阵分解的直接求解器）可以高效地求得下一时刻的波函数。此算法具有二阶的时间和空间截断误差 $O(\Delta t^2, \Delta r^2, \Delta \phi^2)$，能够高保真地模拟高斯波包在通过双缝势垒后的干涉演化，以及由矢量势引起的干涉条纹移动。
-# 基于球坐标系下分裂算符法的 Aharonov-Bohm 效应数值模拟
+# 5. 基于球坐标系下分裂算符法的 Aharonov-Bohm 效应数值模拟
 传统的 Aharonov-Bohm (AB) 效应模拟通常在二维直角坐标系中以平面波形式，或在圆柱坐标系中以无限长螺线管形式进行。然而，在真实的量子点、富勒烯或其他受限量子体系中，电子往往被限制在球形几何结构中。本实验旨在构建一个全三维球坐标 $(r, \theta, \phi)$ 下的数值演化模型。相比于二维模型，三维球坐标系能够准确描述波函数随距离的几何衰减，即$\frac{1}{r^2}$ 能量衰减律，以及极角方向的空间衍射特性，是研究真实受限量子体系的必要手段。
 ## 1. 理论模型 (Theoretical Model)
 ### 1.1 哈密顿量与换元法
